@@ -1,27 +1,49 @@
-version: "3.9"
+version: '3.7'
 
 services:
 
+  cliente:
+    container_name: cliente
+    build: ./Cliente
+    depends_on:
+      - redis
+      - servidor
+    ports:
+      - "3000:3000"
+
+  servidor:
+    container_name: servidor
+    build: ./Servidor
+    depends_on:
+      - db
+    ports:
+      - "8030:8030"
+
   db:
-    build: ./Postgres
+    image: docker.io/bitnami/postgresql:11
     restart: always
     container_name: postgres
+    volumes:
+      - ./Postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRESQL_USER=admin
+      - POSTGRESQL_DATABASE=Tarea1SD
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_PASSWORD=admin
     ports:
       - "9091:5432"
-    environment:
-      POSTGRES_DB: Tarea1SD
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
 
     
   redis:
-    build: ./Redis
     container_name: redis
+    build: ./Redis
+    restart: always
     ports:
       - "6379:6379"
+    environment:
+      - REDIS_MAXMEMORY=1mb
+      - REDIS_MAXMEMORY_POLICY=allkeys-lru
+      - ALLOW_EMPTY_PASSWORD=yes
+    command: ["redis-server", "--bind", "redis", "--maxmemory 1mb", "--maxmemory-policy allkeys-lru"]
 
-  node:
-    build:  ./Node
-    container_name: node-server
-    ports:
-      - "3001:3000"
+
