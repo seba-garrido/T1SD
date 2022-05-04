@@ -1,5 +1,9 @@
 # Tarea N°1 Sistemas Distribuidos 2022
 
+## __Integrantes__
+Sebastián Garrido
+Jorge Fernández
+
 ## __Problemática__
 R-GGB Spa es una empresa tradicional dedicada al rubro del e-commerce, que, debido a los diversos cambios tecnológicos,no se encuentra a la vanguardia de los nuevos requerimientos del sistema. Esta empresa realiza sus operaciones a través de SOAP, desarrollado en lenguaje C y Assembly.
 Debido a un creciente aumento en usuarios en su plataforma, se traduce en un aumento en las ventas pero también
