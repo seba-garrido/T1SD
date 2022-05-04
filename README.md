@@ -1,7 +1,7 @@
 # Tarea N°1 Sistemas Distribuidos 2022
 
 ## __Integrantes__
-Sebastián Garrido
+Sebastián Garrido,
 Jorge Fernández
 
 ## __Problemática__
