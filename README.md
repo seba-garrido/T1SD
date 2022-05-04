@@ -27,7 +27,7 @@ En nuestro archivo "docker-compose" contamos con la siguiente configuración:
     - 6379
 - Comandos:
     - command: ["redis-server", "--bind", "redis", "--maxmemory 1mb", "--maxmemory-policy allkeys-lru"]
-Este ultimo noas permite iniciar el servidor con los parametros de politica de remoción y memoria que nosotros deseamos.
+Este ultimo nos permite iniciar el servidor con los parametros de politica de remoción y memoria que nosotros deseamos.
 
 ## __Comparación entre algoritmos__
 |        LRU        |       LFU            |
