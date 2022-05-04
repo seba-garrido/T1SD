@@ -1,7 +1,8 @@
 const grpc = require("@grpc/grpc-js");
-var protoLoader = require("@grpc/proto-loader");
-const { client } = require("./src/dbconnector");
 const PROTO_PATH = "./search.proto"
+var protoLoader = require("@grpc/proto-loader");
+const { client } = require("./db/conexion_db");
+
 
 const variables = {
   keepCase: true,
@@ -23,7 +24,7 @@ servidor.addService(auxiliar.InventorySearch.service, {
       if (err) {
         return console.error('Error en el cliente', err.stack)
       }
-      client.query(`SELECT * FROM items WHERE name LIKE '%' || $1 || '%';`, [search], (err, response) => {
+      client.query(`select * from items where name like '%' || $1 || '%';`, [search], (err, response) => {
         release()
         if (err) {
           return console.error('Error ejecutando la consulta', err.stack)
@@ -34,3 +35,12 @@ servidor.addService(auxiliar.InventorySearch.service, {
     })
   },
 });
+
+servidor.bindAsync(
+  "0.0.0.0:50051",
+  grpc.ServerCredentials.createInsecure(),
+  (error, port) => {
+    console.log("Servidor Corriendo en http://127.0.0.1:50051");
+    servidor.start();
+  }
+);

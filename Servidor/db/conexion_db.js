@@ -5,7 +5,7 @@ const conexion = {
     host:'postgres',
     database:'Tarea1SD',
     password:'admin',
-    port:5432
+    port:9091
 }
 
 const client = new Pool(conexion)
